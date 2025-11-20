@@ -1,0 +1,40 @@
+--------- Create venv-----------
+py -m venv venv
+
+--------- Activate venv --------
+venv\Scripts\activate
+
+---------- Install Django ---------
+pip install django
+
+pip freeze
+pip freeze > requirements.txt
+
+---------- Start Django Project/Create config folder ---------
+django-admin startproject config .
+
+------------ RUN -----------------
+py manage.py runserver
+
+------ Create an application called pages ---------
+py manage.py startapp pages
+
+
+------------Settings.py changes ---------------
+in INSTALLED APPS:
+settings.py 
+
+in TEMPLATES:
+'DIRS': [str(BASE_DIR.joinpath("templates"))],
+
+--------in config/urls.py------------
+
+in urlpatterns:
+path('', include('pages.urls')),
+
+----------create .gitignore ---------
+venv
+*__pycache__*
+
+---------create superuser ----------
+python manage.py create superuser
