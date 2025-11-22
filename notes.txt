@@ -13,8 +13,6 @@ pip freeze > requirements.txt
 ---------- Start Django Project/Create config folder ---------
 django-admin startproject config .
 
------------- RUN -----------------
-py manage.py runserver
 
 ------ Create an application called pages ---------
 py manage.py startapp pages
@@ -36,5 +34,16 @@ path('', include('pages.urls')),
 venv
 *__pycache__*
 
+-------migrate - to creat db---------
+py manage.py migrate
+
 ---------create superuser ----------
-python manage.py create superuser
+python manage.py createsuperuser
+
+------------ RUN -----------------
+py manage.py runserver
+
+
+--------After New Model Created --------
+py manage.py makemigrations
+py manage.py migrate
