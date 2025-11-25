@@ -39,7 +39,7 @@ class PostCreateView(CreateView): #CreateView is a POST request
     template_name = "posts/new.html"
     model = Post
     #fields attribute is a list and lets us enable/disable the inputs to render in the html form and depends on the model
-    fields = ["title", "subtitle", "body"]
+    fields = ["title", "subtitle", "body", "image"]
 
     def form_valid(self, form):
         print(form.data)
@@ -55,7 +55,7 @@ class PostUpdateView(UpdateView):
     template_name = "posts/update.html"
     context_object_name = "single_post"
     model = Post
-    fields = ["title", "subtitle", "body"]
+    fields = ["title", "subtitle", "body", "image"]
 
 class PostDeleteView(DeleteView):
     """

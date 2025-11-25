@@ -25,6 +25,13 @@
                 <h5 class="card-subtitle mb-3 text-muted">{{ single_post.subtitle }}</h5>
             {% endif %}
 
+            {% if single_post.image %}
+                <img src="{{ single_post.image.url }}" 
+                    class="img-fluid rounded"
+                    alt="{{single_post.title}}"
+                    style="object-fit: cover; width: 150px; height: 150px">
+            {% endif %}
+
             <div class="card-text mb-3">{{ single_post.body|linebreaks }}</div>
 
             <p class="text-muted small mb-0">By {{ single_post.author }} • {{ single_post.created_on }}</p>

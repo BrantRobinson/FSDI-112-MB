@@ -16,7 +16,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form id="update-form" method="post">
+            <form id="update-form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="mt-3">
