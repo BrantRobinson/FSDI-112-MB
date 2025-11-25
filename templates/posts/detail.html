@@ -34,7 +34,7 @@
 
             <div class="card-text mb-3">{{ single_post.body|linebreaks }}</div>
 
-            <p class="text-muted small mb-0">By {{ single_post.author }} • {{ single_post.created_on }}</p>
+            <p class="text-muted small mb-0">By {{ single_post.author }} • {{ single_post.created_on|date:"F d, Y \a\t H:i A" }}</p>
         </div>
     </div>
    
