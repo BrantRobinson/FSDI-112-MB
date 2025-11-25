@@ -1,4 +1,6 @@
 from .models import Post
+from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from django.views.generic import (
     ListView,
     DetailView,
@@ -37,4 +39,29 @@ class PostCreateView(CreateView): #CreateView is a POST request
     template_name = "posts/new.html"
     model = Post
     #fields attribute is a list and lets us enable/disable the inputs to render in the html form and depends on the model
-    fields = ["title", "subtitle", "body", "author"]
+    fields = ["title", "subtitle", "body"]
+
+    def form_valid(self, form):
+        print(form.data)
+        # print(form.instance)
+        print(User.objects.all())
+        form.instance.author = User.objects.filter(is_superuser=True).first()
+        return super().form_valid(form)
+
+class PostUpdateView(UpdateView): 
+    """
+    Render a form that will allow the user to update certain fields of their post
+    """
+    template_name = "posts/update.html"
+    context_object_name = "single_post"
+    model = Post
+    fields = ["title", "subtitle", "body"]
+
+class PostDeleteView(DeleteView):
+    """
+    View used to delete a post
+    """
+    template_name = "posts/delete.html"
+    model = Post
+    context_object_name = "single_post"
+    success_url = reverse_lazy("post_list")

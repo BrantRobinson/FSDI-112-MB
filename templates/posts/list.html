@@ -9,18 +9,29 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Posts</h1>
-    <ul>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Posts</h1>
+        <a href="{% url 'post_new' %}" class="btn btn-primary">New Post</a>
+    </div>
+
+    <div class="row">
         {% for item in posts %}
-            <li>
-                <div>
-                    <h5>Title: {{item.title}}</h5>
-                    <p>Body: {{item.body|truncatechars:10}}</p>
-                    <span><strong>Author:</strong> {{item.author}}</span>
-                    <br>
-                    <a href="{% url 'post_detail' item.id %}">Continue Reading... </a>
+            <div class="col-12 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.body|truncatechars:150 }}</p>
+                        <p class="text-muted mb-2"><small>By {{ item.author }}</small></p>
+                        <a href="{% url 'post_detail' item.id %}" class="btn btn-sm btn-outline-primary me-1">Read</a>
+                        <a href="{% url 'post_update' item.id %}" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                        <a href="{% url 'post_delete' item.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
                 </div>
-            </li>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">No posts yet. Create the first post!</div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

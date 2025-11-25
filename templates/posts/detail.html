@@ -10,15 +10,25 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <h1>{{ single_post.title }}</h1>
-        <h4>{{ single_post.subtitle }}</h4>
-        <p>{{ single_post.body }}</p>
-        <span>{{ single_post.created_on }}</span>
-        <span>{{ single_post.author }}</span>
-        <br>
-        <a href="#" class="btn btn-primary">Edit</a>
-        <a href="#" class="btn btn-danger">Delete</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">{{ single_post.title }}</h1>
+        <div>
+            <a href="{% url 'post_list' %}" class="btn btn-outline-secondary me-2">Back</a>
+            <a href="{% url 'post_update' single_post.id %}" class="btn btn-primary me-1">Edit</a>
+            <a href="{% url 'post_delete' single_post.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            {% if single_post.subtitle %}
+                <h5 class="card-subtitle mb-3 text-muted">{{ single_post.subtitle }}</h5>
+            {% endif %}
+
+            <div class="card-text mb-3">{{ single_post.body|linebreaks }}</div>
+
+            <p class="text-muted small mb-0">By {{ single_post.author }} • {{ single_post.created_on }}</p>
+        </div>
     </div>
    
 {% endblock %}
